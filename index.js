@@ -92,27 +92,26 @@ var finances = [
   // The total number of months included in the dataset.
   console.log("Total months: " + finances.length);
   
-  // Created an array which includes only the numbers from the finances array, and one that includes only the months:
+  // Created an array which includes only the numbers from the finances array:
   var numbersOnly = []
   for (var i = 0; i < finances.length; i++) {
       numbersOnly.push (finances[i][1]);
   }
-  
-  
-  // Calculated the net total amount of Profit/Losses over the entire period and logged to console.
+    
+  // Calculated the net total amount of profit/loss over the entire period and logged to console.
   var sum = numbersOnly.reduce(function(a, b) { return a + b; }, 0);
   console.log("Total: $" + sum);
   
-  // created a new array consisting of the changes between one month to another
+  // created a new array consisting of the changes between one month to another by sutracting each element from the one after it
   var monthlyChanges = []
   for (var i = 0; i < numbersOnly.length-1; i++) {
   monthlyChanges.push (numbersOnly[i+1]-numbersOnly[i])}
-  // console.log (monthlyChanges)
+  // console.log (monthlyChanges) - to check the new array
   
-  // summed monthly changes 
+  // summed the monthly changes 
   var sumOfMonthlyChanges = monthlyChanges.reduce(function(a, b) { return a + b; }, 0);
-  // console.log(sumOfMonthlyChanges) to check the sum
-  // divided by the number of elements within the monthlyChanges array. rounded to 2 decimal places using "to fixed(2)"
+  // console.log(sumOfMonthlyChanges) - to check the sum
+  // divided the sum of the changes by the number of elements within the monthlyChanges array. rounded to 2 decimal places using "to fixed(2)"
   let averageChanges = sumOfMonthlyChanges / (monthlyChanges.length);
   console.log("Average Change: $" + averageChanges.toFixed(2));
   
@@ -123,18 +122,18 @@ var finances = [
   var greatestIncreaseMonth = 0;
   
   // created new array containing only the months from the "finances" array so it can be logged in console.
-  // started the 'for loop' for the array at i = 1 as first element cannot be the biggest increase of decrease in profit
+  // started the 'for loop' for the array at i = 1 as first element cannot be the biggest increase or decrease in profit
   var monthsOnly = []
   for (var i = 1; i < finances.length; i++) {
       monthsOnly.push (finances[i][0]);
   }
   
-  // created a for loop to find the biggest number within the monthlChange array
+  // created a for loop to find the biggest number within the monthlyChange array
   for (var i = 0; i < monthlyChanges.length; i++) {
       if(monthlyChanges[i]>greatestIncrease)
       {
           greatestIncrease = monthlyChanges[i]
-          // saved the index number (+1 to account for the 'monthlyChanges' array having one less element than the 'finances' array) to the 'greatestIncreaseMonth' variable so this can be printed in the console log)
+          // saved the index number to the 'greatestIncreaseMonth' variable so this can be printed in the console log
           greatestIncreaseMonth = i;
       }
   }
