@@ -87,10 +87,6 @@ var finances = [
 ['Feb-2017', 671099]
 ];
 
-var numDifferences = 0
-var averageChange = 0
-
-
 console.log("Financial Analysis");
 console.log("-----------------------------");
 // The total number of months included in the dataset.
@@ -103,22 +99,48 @@ for (var i = 0; i < finances.length; i++) {
 }
  
 // Calculated the net total amount of Profit/Losses over the entire period and logged to console.
-let sum = 0;
-for (const value of numbersOnly) {
-  sum += value;
-}
+var sum = numbersOnly.reduce(function(a, b) { return a + b; }, 0);
 console.log("Total: $" + sum);
 
-// average change between months. need to - 
-// find out how to compare one variable to the next
-    // this means taking each value from [1] onwards and subtracing it from the one before [i - 1]
-// - sum those changes
-// - divide those changes by numbersOnly.lenghth
-
+// created a new array consisting of the changes between one month to another
 var monthlyChanges = []
 for (var i = 0; i < numbersOnly.length-1; i++) {
 monthlyChanges.push (numbersOnly[i+1]-numbersOnly[i])}
-console.log (monthlyChanges)
+// console.log (monthlyChanges)
+
+// summed monthly changes and then devided by the number of months minus 1
+var sumOfMonthlyChanges = monthlyChanges.reduce(function(a, b) { return a + b; }, 0);
+// console.log(sumOfMonthlyChanges)
+let averageChanges = sumOfMonthlyChanges / (numbersOnly.length - 1);
+console.log("Average Change: $" + averageChanges.toFixed(2));
+
+// found biggest number in the array of average Changes
+
+var largestIncrease= 0;
+
+for (i=0; i<monthlyChanges.length; i++){
+    if (monthlyChanges[i]>largestIncrease) {
+        largestIncrease=monthlyChanges[i];  
+    } 
+}
+
+var largestDecrease= 0;
+
+for (i=0; i<monthlyChanges.length; i++){
+  if (monthlyChanges[i]<largestDecrease) {
+      largestDecrease=monthlyChanges[i];
+      
+  } 
+} 
+
+console.log("Greatest Increase in Profits: enter month ($" + largestIncrease + ")");
+console.log("Greatest Decrease in Profits: enter month ($" + largestDecrease + ")");
+
+
+
+
+
+
  
 
 
