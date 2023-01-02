@@ -86,3 +86,52 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+
+var numDifferences = 0
+var averageChange = 0
+
+
+console.log("Financial Analysis");
+console.log("-----------------------------");
+// The total number of months included in the dataset.
+console.log("Total months: " + finances.length);
+
+// Created an array which includes only the numbers from the finances array:
+var numbersOnly = []
+for (var i = 0; i < finances.length; i++) {
+    numbersOnly.push (finances[i][1]);
+}
+ 
+// Calculated the net total amount of Profit/Losses over the entire period and logged to console.
+let sum = 0;
+for (const value of numbersOnly) {
+  sum += value;
+}
+console.log("Total: $" + sum);
+
+// average change between months. need to - 
+// find out how to compare one variable to the next
+    // this means taking each value from [1] onwards and subtracing it from the one before [i - 1]
+// - sum those changes
+// - divide those changes by numbersOnly.lenghth
+
+var monthlyChanges = []
+for (var i = 0; i < numbersOnly.length-1; i++) {
+monthlyChanges.push (numbersOnly[i+1]-numbersOnly[i])}
+console.log (monthlyChanges)
+ 
+
+
+
+
+
+
+
+
+
+// }
+// console.log(changes);
+// The greatest increase in profits (date and amount) over the entire period.- how do I get the date an amount when searching through only for numbers 
+// loop through and stop at the biggest one?
+
+// The greatest decrease in losses (date and amount) over the entire period.
