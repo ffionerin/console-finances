@@ -85,82 +85,80 @@ var finances = [
   ['Dec-2016', 60988],
   ['Jan-2017', 138230],
   ['Feb-2017', 671099]
-  ];
-  
-  console.log("Financial Analysis");
-  console.log("-----------------------------");
-  // The total number of months included in the dataset.
-  console.log("Total months: " + finances.length);
-  
-  // Created an array which includes only the numbers from the finances array:
-  var numbersOnly = []
-  for (var i = 0; i < finances.length; i++) {
-      numbersOnly.push (finances[i][1]);
+];
+
+console.log("Financial Analysis");
+console.log("-----------------------------");
+// The total number of months included in the dataset.
+console.log("Total months: " + finances.length);
+
+// Created an array which includes only the numbers from the finances array:
+var numbersOnly = []
+for (var i = 0; i < finances.length; i++) {
+  numbersOnly.push(finances[i][1]);
+}
+
+// Calculated the net total amount of profit/loss over the entire period and logged to console.
+var sum = numbersOnly.reduce(function (a, b) { return a + b; }, 0);
+console.log("Total: $" + sum);
+
+// created a new array consisting of the changes between one month to another by sutracting each element from the one after it
+var monthlyChanges = []
+for (var i = 0; i < numbersOnly.length - 1; i++) {
+  monthlyChanges.push(numbersOnly[i + 1] - numbersOnly[i])
+}
+// console.log (monthlyChanges) - to check the new array
+
+// summed the monthly changes 
+var sumOfMonthlyChanges = monthlyChanges.reduce(function (a, b) { return a + b; }, 0);
+// console.log(sumOfMonthlyChanges) - to check the sum
+// divided the sum of the changes by the number of elements within the monthlyChanges array. rounded to 2 decimal places using "to fixed(2)"
+let averageChanges = sumOfMonthlyChanges / (monthlyChanges.length);
+console.log("Average Change: $" + averageChanges.toFixed(2));
+
+// defined two new variables - 
+// One to hold the greatest increase in change
+// and another to hold an index number so that the corresponding month can console logged
+var greatestIncrease = 0;
+var greatestIncreaseMonth = 0;
+
+// created new array containing only the months from the "finances" array so it can be logged in console.
+// started the 'for loop' for the array at i = 1 as first element cannot be the biggest increase or decrease in profit
+var monthsOnly = []
+for (var i = 1; i < finances.length; i++) {
+  monthsOnly.push(finances[i][0]);
+}
+
+// created a for loop to find the biggest number within the monthlyChange array
+for (var i = 0; i < monthlyChanges.length; i++) {
+  if (monthlyChanges[i] > greatestIncrease) {
+    greatestIncrease = monthlyChanges[i]
+    // saved the index number to the 'greatestIncreaseMonth' variable so this can be printed in the console log
+    greatestIncreaseMonth = i;
   }
-    
-  // Calculated the net total amount of profit/loss over the entire period and logged to console.
-  var sum = numbersOnly.reduce(function(a, b) { return a + b; }, 0);
-  console.log("Total: $" + sum);
-  
-  // created a new array consisting of the changes between one month to another by sutracting each element from the one after it
-  var monthlyChanges = []
-  for (var i = 0; i < numbersOnly.length-1; i++) {
-  monthlyChanges.push (numbersOnly[i+1]-numbersOnly[i])}
-  // console.log (monthlyChanges) - to check the new array
-  
-  // summed the monthly changes 
-  var sumOfMonthlyChanges = monthlyChanges.reduce(function(a, b) { return a + b; }, 0);
-  // console.log(sumOfMonthlyChanges) - to check the sum
-  // divided the sum of the changes by the number of elements within the monthlyChanges array. rounded to 2 decimal places using "to fixed(2)"
-  let averageChanges = sumOfMonthlyChanges / (monthlyChanges.length);
-  console.log("Average Change: $" + averageChanges.toFixed(2));
-  
-  // defined two new variables - 
-  // One to hold the greatest increase in change
-  // and another to hold an index number so that the corresponding month can console logged
-  var greatestIncrease = 0;
-  var greatestIncreaseMonth = 0;
-  
-  // created new array containing only the months from the "finances" array so it can be logged in console.
-  // started the 'for loop' for the array at i = 1 as first element cannot be the biggest increase or decrease in profit
-  var monthsOnly = []
-  for (var i = 1; i < finances.length; i++) {
-      monthsOnly.push (finances[i][0]);
+}
+// console logged some string, the largest increase in profits variable, along with the corresponding month from the finances array
+console.log("Greatest Increase in Profits: " + monthsOnly[greatestIncreaseMonth] + " ($" + greatestIncrease + ")");
+
+
+// repeated above steps for finding greatest decrease
+var greatestDecrease = 0;
+var greatestDecreaseMonth = 0;
+
+for (var i = 0; i < monthlyChanges.length; i++) {
+  if (monthlyChanges[i] < greatestDecrease) {
+    greatestDecrease = monthlyChanges[i]
+    greatestDecreaseMonth = i;
   }
-  
-  // created a for loop to find the biggest number within the monthlyChange array
-  for (var i = 0; i < monthlyChanges.length; i++) {
-      if(monthlyChanges[i]>greatestIncrease)
-      {
-          greatestIncrease = monthlyChanges[i]
-          // saved the index number to the 'greatestIncreaseMonth' variable so this can be printed in the console log
-          greatestIncreaseMonth = i;
-      }
-  }
-  // console logged some string, the largest increase in profits variable, along with the corresponding month from the finances array
-  console.log("Greatest Increase in Profits: " + monthsOnly[greatestIncreaseMonth] + " ($" + greatestIncrease + ")" );
-  
-  
-  // repeated above steps for finding greatest decrease
-  var greatestDecrease = 0;
-  var greatestDecreaseMonth = 0;
-  
-  for (var i = 0; i < monthlyChanges.length; i++) {
-    if(monthlyChanges[i]<greatestDecrease)
-    {
-      greatestDecrease = monthlyChanges[i]
-      greatestDecreaseMonth = i;
-    }
-  }
-  
-  console.log("Greatest Decrease in Profits: " + monthsOnly[greatestDecreaseMonth] + " ($" + greatestDecrease + ")")
-  
-  
-  
-  
-   
-  
-  
-  
-  
-  
+}
+
+console.log("Greatest Decrease in Profits: " + monthsOnly[greatestDecreaseMonth] + " ($" + greatestDecrease + ")")
+
+
+
+
+
+
+
+
+
