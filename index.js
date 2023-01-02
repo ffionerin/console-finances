@@ -108,35 +108,45 @@ for (var i = 0; i < numbersOnly.length-1; i++) {
 monthlyChanges.push (numbersOnly[i+1]-numbersOnly[i])}
 // console.log (monthlyChanges)
 
-// summed monthly changes and then devided by the number of months minus 1
+// summed monthly changes 
 var sumOfMonthlyChanges = monthlyChanges.reduce(function(a, b) { return a + b; }, 0);
-// console.log(sumOfMonthlyChanges)
-let averageChanges = sumOfMonthlyChanges / (numbersOnly.length - 1);
+// console.log(sumOfMonthlyChanges) to check the sum
+// divided by the number of elements within the monthlyChanges array. rounded to 2 decimal places using "to fixed(2)"
+let averageChanges = sumOfMonthlyChanges / (monthlyChanges.length);
 console.log("Average Change: $" + averageChanges.toFixed(2));
 
-// found biggest number in the array of average Changes
+// definted two new variables - 
+// One to hold the greatest increase in change
+// and another to hold an index number so that the corresponding month can console logged
+var greatestIncrease = 0;
+var greatestIncreaseMonth = 0;
 
-var largestIncrease= 0;
+// created a for loop to find the biggest number within the monthlChange array
+for (var i = 0; i < monthlyChanges.length; i++) {
+    if(monthlyChanges[i]>greatestIncrease)
+    {
+        greatestIncrease = monthlyChanges[i]
+        // saved the index number (+1 to account for the 'monthlyChanges' array having one less element than the 'finances' array) to the 'greatestIncreaseMonth' variable so this can be printed in the console log)
+        greatestIncreaseMonth = i+1;
+    }
+}
+// console logged some string, the largest increase in profits variable, along with the corresponding month from the finances array - ([0] included so that just the month would be logged, not the profit/loss for that month)
+console.log("Greatest Increase in Profits: " + finances[greatestIncreaseMonth][0] + " ($" + greatestIncrease + ")" );
 
-for (i=0; i<monthlyChanges.length; i++){
-    if (monthlyChanges[i]>largestIncrease) {
-        largestIncrease=monthlyChanges[i];  
-    } 
+
+// repeated above steps for finding greatest decrease
+var greatestDecrease = 0;
+var greatestDecreaseMonth = 0;
+
+for (var i = 0; i < monthlyChanges.length; i++) {
+  if(monthlyChanges[i]<greatestDecrease)
+  {
+    greatestDecrease = monthlyChanges[i]
+    greatestDecreaseMonth = i+1;
+  }
 }
 
-var largestDecrease= 0;
-
-for (i=0; i<monthlyChanges.length; i++){
-  if (monthlyChanges[i]<largestDecrease) {
-      largestDecrease=monthlyChanges[i];
-      
-  } 
-} 
-
-console.log("Greatest Increase in Profits: enter month ($" + largestIncrease + ")");
-console.log("Greatest Decrease in Profits: enter month ($" + largestDecrease + ")");
-
-
+console.log("Greatest Decrease in Profits: " + finances[greatestDecreaseMonth][0] + " ($" + greatestDecrease + ")")
 
 
 
